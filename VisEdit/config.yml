@@ -1,0 +1,5 @@
+PluginVersion: 1.2.5
+Settings:
+  #The following setting will change the maximim number of times a user can undo or redo at once
+  MaxOperations: 3
+Users:

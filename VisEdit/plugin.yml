@@ -1,0 +1,40 @@
+main: io.github.guru2764.visedit.VisEdit
+name: VisEdit
+version: '1.2.5'
+api-version: 1.15
+description: Guru's First Plugin!
+author: Guru2764
+website: https://www.spigotmc.org/resources/visedit.70885/
+prefix: VisEdit
+commands:
+   vset:
+      description: Replaces selection with the specified block.
+      usage: /vset X1 Y1 Z1 X2 Y2 Z2 [Material] (blockState:value|blockState:value) 
+      permission: visedit.set
+      permission-message: You don't have permission to use this command!
+   vundo:
+      description: Rolls back last operation.
+      usage: /vundo (Iterations)
+      permission: visedit.undo
+      permission-message: You don't have permission to use this command!
+   vredo:
+      description: Restores last undo.
+      usage: /vredo (Iterations)
+      permission: visedit.vredo
+      permission-message: You don't have permission to use this command!
+permissions:
+    visedit.*:
+        description: Gives access to all commands
+        children:
+            visedit.set: true
+            visedit.undo: true
+            visedit.redo: true
+    visedit.set:
+        description: Allows you to set a selection to be blocks
+        default: op
+    visedit.undo:
+        description: Allows you to undo operations
+        default: op
+    visedit.redo:
+        description: Allows you to redo operations
+        default: op

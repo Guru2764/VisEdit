@@ -14,19 +14,27 @@ import org.bukkit.block.Block;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class UserSave {
+	
+  //Saves selection when doing select
   public static void userSave(SetOperation newOperation) throws IOException {
-    JavaPlugin plugin = newOperation.getPlugin();
+    
+	//Variable gathering  
+	JavaPlugin plugin = newOperation.getPlugin();
     World world = newOperation.getWorld();
     int[] coords = newOperation.getCoords();
     String userName = newOperation.getUserName();
     Integer currentNumber = Integer.valueOf(UserData.getNumber(userName, plugin));
     File playerFile = new File(plugin.getDataFolder() + "/userdata/" + userName + "-" + currentNumber + ".yml");
+    
+    //Checks if there is a user file
     if (!playerFile.exists())
       try {
         playerFile.createNewFile();
       } catch (IOException e) {
         Bukkit.getLogger().info("[VisEdit] There was a problem making the save file for " + userName + "!");
       }  
+    
+    //For loop to write to file
     PrintWriter writer = new PrintWriter(playerFile);
     writer.println(world.getName());
     for (int y = coords[2]; y <= coords[3]; y++) {
@@ -41,19 +49,26 @@ public class UserSave {
     writer.close();
   }
   
+  //Saves selection when doing undo
   public static void userSave(UndoOperation newOperation) throws IOException {
+	  
+	//Variable gathering
     JavaPlugin plugin = newOperation.getPlugin();
     World world = newOperation.getWorld();
     int[] coords = newOperation.getCoords();
     String userName = newOperation.getUserName();
     Integer currentNumber = Integer.valueOf(UserData.getNumber(userName, plugin));
     File playerFile = new File(plugin.getDataFolder() + "/userdata/" + userName + "-" + currentNumber + ".yml");
+    
+    //Checks to see if player file exists
     if (!playerFile.exists())
       try {
         playerFile.createNewFile();
       } catch (IOException e) {
         Bukkit.getLogger().info("[VisEdit] There was a problem making the save file for " + userName + "!");
-      }  
+      }
+    
+    //For loop to write blocks to file
     PrintWriter writer = new PrintWriter(playerFile);
     writer.println(world.getName());
     for (int y = coords[2]; y <= coords[3]; y++) {
@@ -69,19 +84,26 @@ public class UserSave {
     writer.close();
   }
   
+  //Saves selection when doing redo
   public static void userSave(RedoOperation newOperation) throws IOException {
-    JavaPlugin plugin = newOperation.getPlugin();
+    
+	//Variable gathering  
+	JavaPlugin plugin = newOperation.getPlugin();
     World world = newOperation.getWorld();
     int[] coords = newOperation.getCoords();
     String userName = newOperation.getUserName();
     Integer currentNumber = Integer.valueOf(UserData.getNumber(userName, plugin));
     File playerFile = new File(plugin.getDataFolder() + "/userdata/" + userName + "-" + currentNumber + ".yml");
+    
+    //Checks to see if player file exists
     if (!playerFile.exists())
       try {
         playerFile.createNewFile();
       } catch (IOException e) {
         Bukkit.getLogger().info("[VisEdit] There was a problem making the save file for " + userName + "!");
       }  
+    
+    //For loop to write blocks to file
     PrintWriter writer = new PrintWriter(playerFile);
     writer.println(world.getName());
     for (int y = coords[2]; y <= coords[3]; y++) {
@@ -97,6 +119,8 @@ public class UserSave {
     writer.close();
   }
   
+  
+  //Writes to file 
   protected static void edit(PrintWriter writer, Block block, String user) {
     writer.println(block.getX() + " " + block.getY() + " " + block.getZ() + " " + block
         .getBlockData().getMaterial().toString() + BlockCheck.getData(block));

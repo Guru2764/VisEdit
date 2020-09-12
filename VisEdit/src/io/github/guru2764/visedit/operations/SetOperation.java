@@ -8,21 +8,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SetOperation extends BlockCommandOperation {
   private int[] coords = new int[6];
-  
-  private Location loc1;
-  
-  private Location loc2;
-  
+  private Location loc1,loc2;
   private Material newMaterial;
-  
   private String newData;
-  
   private boolean hasValidData = false, isOneBlock = false, usingLocation = false;
   
+  //Constructor
   public SetOperation(CommandSender newSender, World newWorld, JavaPlugin newPlugin) {
     super(newSender, newPlugin, newWorld);
   }
   
+  //Coordinates method
   public void setCoords(int x1, int y1, int z1, int x2, int y2, int z2) {
     if (x1 <= x2) {
       this.coords[0] = x1;
@@ -46,17 +42,16 @@ public class SetOperation extends BlockCommandOperation {
       this.coords[5] = z1;
     } 
   }
-  
   public void setCoords(int x, int y, int z) {
     this.coords[0] = x;
     this.coords[1] = y;
     this.coords[2] = z;
   }
-  
   public int[] getCoords() {
     return this.coords;
   }
   
+  //Location Methods
   public void setLoc(int n, int x, int y, int z) {
     if (n == 1) {
       this.loc1 = new Location(this.world, x, y, z);
@@ -64,51 +59,49 @@ public class SetOperation extends BlockCommandOperation {
       this.loc2 = new Location(this.world, x, y, z);
     } 
   }
-  
   public Location getLoc1() {
     return this.loc1;
   }
-  
   public Location getLoc2() {
     return this.loc2;
   }
   
+  //Material Methods
   public void setNewMaterial(Material inputMaterial) {
     this.newMaterial = inputMaterial;
   }
-  
   public Material getNewMaterial() {
     return this.newMaterial;
   }
   
+  //Data Methods
   public void setNewData(String inputData) {
     this.newData = inputData;
   }
-  
   public String getNewData() {
     return this.newData;
   }
-  
+
+  //ValidData Methods
   public void setValidData(boolean newValidData) {
     this.hasValidData = newValidData;
   }
-  
   public boolean isValidData() {
     return this.hasValidData;
   }
   
+  //IsOneBlock Methods
   public boolean isOneBlock() {
     return this.isOneBlock;
   }
-  
   public void setOneBlock(boolean isOneBlock) {
     this.isOneBlock = isOneBlock;
   }
   
+  //IsUsingLocation Methods
   public boolean isUsingLocation() {
     return this.usingLocation;
   }
-  
   public void setUsingLocation(boolean usingLocation) {
     this.usingLocation = usingLocation;
   }

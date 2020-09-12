@@ -8,29 +8,17 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RedoOperation extends BlockCommandOperation {
-  private int number;
-  
+ 
+  //Variables
   private int[] coords = new int[6];
-  
-  private int x1;
-  
-  private int x2;
-  
-  private int y1;
-  
-  private int y2;
-  
-  private int z1;
-  
-  private int z2;
-  
-  private int iterations = 1;
+  private int x1,x2,y1,y2,z1,z2,number,iterations;
   
   public RedoOperation(World newWorld, CommandSender newSender, JavaPlugin newPlugin) {
     super(newSender, newPlugin, newWorld);
     fillCoords();
   }
   
+  //Coordinates methods
   public void fillCoords() {
     FileConfiguration config = this.plugin.getConfig();
     this.x1 = config.getInt("PlayerCoords." + getUserName() + ".x1");
@@ -61,27 +49,26 @@ public class RedoOperation extends BlockCommandOperation {
       this.coords[5] = this.z1;
     } 
   }
-  
   public int[] getCoords() {
     return this.coords;
   }
   
+  //Iterations methods
   public void setIterations(int newIterations) {
     this.iterations = newIterations;
   }
-  
   public int getIterations() {
     return this.iterations;
   }
   
-  public void updateNumber() {
+  //Number methods
+  public void setNumber() {
     try {
       this.number = UserData.getNumber(getUserName(), this.plugin);
     } catch (IOException e) {
       e.printStackTrace();
     } 
   }
-  
   public int getNumber() {
     return this.number;
   }

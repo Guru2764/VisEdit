@@ -24,15 +24,25 @@ import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.command.CommandSender;
 
 public class DataCheck {
+  
+  //Main validation method
   public static boolean dataValidate(String data, SetOperation newOperation) {
-    BlockData blockData = newOperation.getNewMaterial().createBlockData();
+    
+	//Variable gathering 
+	BlockData blockData = newOperation.getNewMaterial().createBlockData();
     CommandSender sender = newOperation.getSender();
+    
+    //Splits data pieces
     String[] dataArray = data.split("\\|");
     if (data.isEmpty())
       return false; 
+    
+    //Splits data and sends each piece to be validated
     for (int i = 0; i < dataArray.length; i++) {
       String dataHeader = StringUtils.substringBeforeLast(dataArray[i], ":");
       String dataContent = StringUtils.substringAfterLast(dataArray[i], ":").toUpperCase();
+      
+      //Big switch statement for each possible input
       switch (dataHeader) {
         case "age":
           if (!validateAge(blockData, dataContent, sender))
@@ -113,6 +123,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates age:
   public static boolean validateAge(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Ageable)) {
       user.sendMessage(ChatColor.RED + "You cannot set an age for this block!");
@@ -127,6 +138,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates attached:
   public static boolean validateAttached(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Attachable)) {
       user.sendMessage(ChatColor.RED + "You cannot set attached for this block!");
@@ -141,6 +153,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates attachment:
   public static boolean validateAttachment(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bell)) {
       user.sendMessage(ChatColor.RED + "You cannot set an age for this block!");
@@ -155,6 +168,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates bites:
   public static boolean validateBites(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Cake)) {
       user.sendMessage(ChatColor.RED + "You cannot set bites for this block!");
@@ -169,6 +183,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates charges:
   public static boolean validateCharges(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof RespawnAnchor)) {
       user.sendMessage(ChatColor.RED + "You cannot set charges for this block!");
@@ -183,6 +198,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates conditional:
   public static boolean validateConditional(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof CommandBlock)) {
       user.sendMessage(ChatColor.RED + "You cannot set conditional for this block!");
@@ -197,6 +213,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates drag:
   public static boolean validateDrag(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof BubbleColumn)) {
       user.sendMessage(ChatColor.RED + "You cannot set a drag for this block!");
@@ -211,6 +228,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates facing:
   public static boolean validateFacing(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Directional)) {
       user.sendMessage(ChatColor.RED + "You cannot set a direction for this block!");
@@ -225,6 +243,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates half:
   public static boolean validateHalf(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bisected)) {
       user.sendMessage(ChatColor.RED + "You cannot set a half for this block!");
@@ -239,6 +258,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates has_bottle_x:
   public static boolean validateHasBottle(BlockData blockData, String dataContent, CommandSender user, int n) {
     if (!(blockData instanceof BrewingStand)) {
       user.sendMessage(ChatColor.RED + "You cannot set has_bottle for this block!");
@@ -253,6 +273,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates honey_level:
   public static boolean validateHoneyLevel(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Beehive)) {
       user.sendMessage(ChatColor.RED + "You cannot set a honey_level for this block!");
@@ -267,6 +288,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates leaves:
   public static boolean validateLeaves(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bamboo)) {
       user.sendMessage(ChatColor.RED + "You cannot set leaves for this block!");
@@ -281,6 +303,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates part:
   public static boolean validatePart(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bed)) {
       user.sendMessage(ChatColor.RED + "You cannot set a part for this block!");
@@ -295,6 +318,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates power:
   public static boolean validatePower(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof AnaloguePowerable)) {
       user.sendMessage(ChatColor.RED + "You cannot set an age for this block!");
@@ -309,6 +333,7 @@ public class DataCheck {
     return true;
   }
   
+  //Validates signal_fire:
   public static boolean validateSignalFire(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Campfire)) {
       user.sendMessage(ChatColor.RED + "You cannot set a signal_fire for this block!");
@@ -323,6 +348,7 @@ public class DataCheck {
     return true;
   }
   
+  //validates type:
   public static boolean validateType(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Chest)) {
       user.sendMessage(ChatColor.RED + "You cannot set a type for this block!");

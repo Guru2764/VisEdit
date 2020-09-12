@@ -8,29 +8,16 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class UndoOperation extends BlockCommandOperation {
-  private int number;
-  
   private int[] coords = new int[6];
+  private int x1,x2,y1,y2,z1,z2,iterations,number;
   
-  private int x1;
-  
-  private int x2;
-  
-  private int y1;
-  
-  private int y2;
-  
-  private int z1;
-  
-  private int z2;
-  
-  private int iterations = 1;
-  
+  //Constructor
   public UndoOperation(World newWorld, CommandSender newSender, JavaPlugin newPlugin) {
     super(newSender, newPlugin, newWorld);
     fillCoords();
   }
   
+  //Coordinates methods
   public void fillCoords() {
     FileConfiguration config = this.plugin.getConfig();
     this.x1 = config.getInt("PlayerCoords." + getUserName() + ".x1");
@@ -39,6 +26,8 @@ public class UndoOperation extends BlockCommandOperation {
     this.x2 = config.getInt("PlayerCoords." + getUserName() + ".x2");
     this.y2 = config.getInt("PlayerCoords." + getUserName() + ".y2");
     this.z2 = config.getInt("PlayerCoords." + getUserName() + ".z2");
+    
+    //Sorts by smallest number
     if (this.x1 <= this.x2) {
       this.coords[0] = this.x1;
       this.coords[1] = this.x2;
@@ -61,19 +50,19 @@ public class UndoOperation extends BlockCommandOperation {
       this.coords[5] = this.z1;
     } 
   }
-  
   public int[] getCoords() {
     return this.coords;
   }
   
+  //Iterations methods
   public void setIterations(int newIterations) {
     this.iterations = newIterations;
   }
-  
   public int getIterations() {
     return this.iterations;
   }
   
+  //Number methods
   public void updateNumber() {
     try {
       this.number = UserData.getNumber(getUserName(), this.plugin);
@@ -81,7 +70,6 @@ public class UndoOperation extends BlockCommandOperation {
       e.printStackTrace();
     } 
   }
-  
   public int getNumber() {
     return this.number;
   }

@@ -12,6 +12,8 @@ import org.bukkit.block.data.Directional;
 public class DataSet {
   public static void dataSet(Block currentBlock, String data) {
     String[] dataArray = data.split("\\|");
+    
+    //Goes through each data piece and sets that data for each block
     for (int i = 0; i < dataArray.length; i++) {
       String dataHeader = StringUtils.substringBeforeLast(dataArray[i], ":");
       String dataContent = StringUtils.substringAfterLast(dataArray[i], ":").toUpperCase();

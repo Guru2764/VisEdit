@@ -10,6 +10,7 @@ import org.bukkit.block.data.Attachable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.FaceAttachable;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Beehive;
@@ -20,6 +21,12 @@ import org.bukkit.block.data.type.Cake;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.CommandBlock;
+import org.bukkit.block.data.type.Comparator;
+import org.bukkit.block.data.type.DaylightDetector;
+import org.bukkit.block.data.type.Dispenser;
+import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.EndPortalFrame;
+import org.bukkit.block.data.type.Farmland;
 import org.bukkit.block.data.type.RespawnAnchor;
 import org.bukkit.command.CommandSender;
 
@@ -68,8 +75,24 @@ public class DataCheck {
           if (!validateConditional(blockData, dataContent, sender))
             return false; 
           break;
+        case "distance":
+          if (!validateDistance(blockData, dataContent, sender))
+            return false; 
+          break;
         case "drag":
           if (!validateDrag(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "enabled":
+          if (!validateEnabled(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "eye":
+          if (!validateEye(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "face":
+          if (!validateFace(blockData, dataContent, sender))
             return false; 
           break;
         case "facing":
@@ -78,6 +101,10 @@ public class DataCheck {
           break;
         case "half":
           if (!validateHalf(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "has_book":
+          if (!validateHasBook(blockData, dataContent, sender))
             return false; 
           break;
         case "has_bottle_0":
@@ -92,16 +119,60 @@ public class DataCheck {
           if (!validateHasBottle(blockData, dataContent, sender, 2))
             return false; 
           break;
+        case "has_record":
+          if (!validateHasRecord(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "hanging":
+          if (!validateHanging(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "hinge":
+          if (!validateHinge(blockData, dataContent, sender))
+            return false; 
+          break;
         case "honey_level":
           if (!validateHoneyLevel(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "inverted":
+          if (!validateInverted(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "in_wall":
+          if (!validateInWall(blockData, dataContent, sender))
             return false; 
           break;
         case "leaves":
           if (!validateLeaves(blockData, dataContent, sender))
             return false; 
           break;
+        case "level":
+            if (!validateLevel(blockData, dataContent, sender))
+              return false; 
+            break;
+        case "lit":
+            if (!validateLit(blockData, dataContent, sender))
+              return false; 
+            break;
+        case "mode":
+          if (!validateMode(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "moisture":
+          if (!validateMoisture(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "orientation":
+          if (!validateOrientation(blockData, dataContent, sender))
+            return false; 
+          break;
         case "part":
           if (!validatePart(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "persistent":
+          if (!validatePersistant(blockData, dataContent, sender))
             return false; 
           break;
         case "power":
@@ -110,6 +181,10 @@ public class DataCheck {
           break;
         case "signal_fire":
           if (!validateSignalFire(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "triggered":
+          if (!validateTriggered(blockData, dataContent, sender))
             return false; 
           break;
         case "type":
@@ -228,6 +303,36 @@ public class DataCheck {
     return true;
   }
   
+  //Validates eye:
+  public static boolean validateEye(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof EndPortalFrame)) {
+      user.sendMessage(ChatColor.RED + "You cannot set an eye for this block!");
+      return false;
+    } 
+    try {
+      ((EndPortalFrame)blockData).setEye(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid eye for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates face:
+  public static boolean validateFace(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof FaceAttachable)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a face for this block!");
+      return false;
+    } 
+    try {
+      ((FaceAttachable)blockData).setAttachedFace(FaceAttachable.AttachedFace.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid face for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
   //Validates facing:
   public static boolean validateFacing(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Directional)) {
@@ -273,6 +378,21 @@ public class DataCheck {
     return true;
   }
   
+  //Validates hinge:
+  public static boolean validateHinge(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Door)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a hinge for this block!");
+      return false;
+    } 
+    try {
+      ((Door)blockData).setHinge(Door.Hinge.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid honey_level for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
   //Validates honey_level:
   public static boolean validateHoneyLevel(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Beehive)) {
@@ -288,6 +408,21 @@ public class DataCheck {
     return true;
   }
   
+  //Validates inverted:
+  public static boolean validateInverted(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof DaylightDetector)) {
+      user.sendMessage(ChatColor.RED + "You cannot set inverted for this block!");
+      return false;
+    } 
+    try {
+      ((DaylightDetector)blockData).setInverted(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid inverted for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
   //Validates leaves:
   public static boolean validateLeaves(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bamboo)) {
@@ -298,6 +433,36 @@ public class DataCheck {
       ((Bamboo)blockData).setLeaves(Bamboo.Leaves.valueOf(dataContent));
     } catch (Exception ec) {
       user.sendMessage(ChatColor.RED + dataContent + " is not a valid leaves for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates mode:
+  public static boolean validateMode(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Comparator)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a mode for this block!");
+      return false;
+    } 
+    try {
+      ((Comparator)blockData).setMode(Comparator.Mode.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid mode for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates moisture:
+  public static boolean validateMoisture(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Farmland)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a moisture for this block!");
+      return false;
+    } 
+    try {
+      ((Farmland)blockData).setMoisture(Integer.parseInt(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid moisture for this block!");
       return false;
     } 
     return true;
@@ -343,6 +508,21 @@ public class DataCheck {
       ((Campfire)blockData).setSignalFire(Boolean.valueOf(dataContent).booleanValue());
     } catch (Exception ec) {
       user.sendMessage(ChatColor.RED + dataContent + " is not a valid signal_fire for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates triggered:
+  public static boolean validateTriggered(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Dispenser)) {
+      user.sendMessage(ChatColor.RED + "You cannot set triggered for this block!");
+      return false;
+    } 
+    try {
+      ((Dispenser)blockData).setTriggered(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid triggered for this block!");
       return false;
     } 
     return true;

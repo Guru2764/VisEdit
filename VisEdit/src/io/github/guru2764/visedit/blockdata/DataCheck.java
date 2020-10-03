@@ -567,8 +567,6 @@ public class DataCheck {
   }
   
   //Validates extended:
-  
-  //Validates extended:
   public static boolean validateExtended(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Piston)) {
       user.sendMessage(ChatColor.RED + "You cannot set extended for this block!");
@@ -582,9 +580,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates eye:
-  
+    
   //Validates eye:
   public static boolean validateEye(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof EndPortalFrame)) {
@@ -599,9 +595,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates facing:
-  
+
   //Validates face:
   public static boolean validateFace(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof FaceAttachable)) {
@@ -631,9 +625,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates half:
-  
+
   //Validates half:
   public static boolean validateHalf(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bisected)) {
@@ -648,8 +640,6 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates hatch:
 
   //Validates has_bottle_x:
   public static boolean validateHasBottle(BlockData blockData, String dataContent, CommandSender user, int n) {
@@ -680,9 +670,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates hanging:
-  
+
   //Validates hanging:
   public static boolean validateHanging(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Lantern)) {
@@ -697,9 +685,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates hinge:
-  
+
   //Validates hinge:
   public static boolean validateHinge(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Door)) {
@@ -714,9 +700,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates in_wall:
-  
+
   //Validates honey_level:
   public static boolean validateHoneyLevel(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Beehive)) {
@@ -776,9 +760,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates layer:
-  
+
   //Validates layers:
   public static boolean validateLayers(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Snow)) {
@@ -793,9 +775,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates leaves:
-  
+
   //Validates leaves:
   public static boolean validateLeaves(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bamboo)) {
@@ -810,9 +790,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates level:
-  
+
   //Validates level:
   public static boolean validateLevel(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Levelled)) {
@@ -842,9 +820,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates locked:
-  
+
   //Validates locked:
   public static boolean validateLocked(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Repeater)) {
@@ -859,9 +835,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates moisture:
-  
+
   //Validates mode:
   public static boolean validateMode(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Comparator)&&!(blockData instanceof StructureBlock)) {
@@ -980,9 +954,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates perstistent:
-  
+
   //Validates persistent:
   public static boolean validatePersistent(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Leaves)) {
@@ -997,9 +969,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates pickles:
-  
+
   //Validates pickles:
   public static boolean validatePickles(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof SeaPickle)) {
@@ -1014,9 +984,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates powered:
-  
+
   //Validates power:
   public static boolean validatePower(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof AnaloguePowerable)) {
@@ -1046,9 +1014,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates rotation:
-  
+
   //Validates rotation:
   public static boolean validateRotation(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Rotatable)) {
@@ -1063,9 +1029,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates short:
-  
+
   //Validates shape:
   public static boolean validateShape(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Rail)&&!(blockData instanceof Stairs)) {
@@ -1105,9 +1069,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates snowy:
-  
+
   //Validates signal_fire:
   public static boolean validateSignalFire(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Campfire)) {
@@ -1137,9 +1099,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates stage:
-  
+
   //Validates stage:
   public static boolean validateStage(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Sapling)) {
@@ -1154,9 +1114,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates triggered:
-  
+
   //Validates south:
   public static boolean validateSouth(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof MultipleFacing)&&!(blockData instanceof RedstoneWire)&&!(blockData instanceof Wall)) {
@@ -1205,9 +1163,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates unstable:
-  
+
   //validates type:
   public static boolean validateType(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Chest)&&!(blockData instanceof Slab)&&!(blockData instanceof TechnicalPiston)) {
@@ -1255,9 +1211,7 @@ public class DataCheck {
     } 
     return true;
   }
-  
-  //Validates up:
-  
+
   //Validates up:
   public static boolean validateUp(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Wall)) {
@@ -1321,5 +1275,5 @@ public class DataCheck {
     } 
     return true;
   }
-}
 
+}

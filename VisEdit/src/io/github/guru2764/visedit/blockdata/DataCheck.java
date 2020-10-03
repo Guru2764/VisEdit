@@ -20,6 +20,8 @@ import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
+import org.bukkit.block.data.Rotatable;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
@@ -46,11 +48,19 @@ import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
+import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.RespawnAnchor;
+import org.bukkit.block.data.type.Sapling;
+import org.bukkit.block.data.type.Scaffolding;
+import org.bukkit.block.data.type.SeaPickle;
 import org.bukkit.block.data.type.Slab;
+import org.bukkit.block.data.type.Snow;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.StructureBlock;
+import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TechnicalPiston;
+import org.bukkit.block.data.type.Tripwire;
+import org.bukkit.block.data.type.TurtleEgg;
 import org.bukkit.block.data.type.Wall;
 import org.bukkit.command.CommandSender;
 
@@ -88,11 +98,15 @@ public class DataCheck {
             return false; 
           break;
         case "axis":
-            if (!validateAxis(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateAxis(blockData, dataContent, sender))
+            return false; 
+          break;
         case "bites":
           if (!validateBites(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "bottom":
+          if (!validateBottom(blockData, dataContent, sender))
             return false; 
           break;
         case "charges":
@@ -101,6 +115,14 @@ public class DataCheck {
           break;
         case "conditional":
           if (!validateConditional(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "delay":
+          if (!validateDelay(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "disarmed":
+          if (!validateDisarmed(blockData, dataContent, sender))
             return false; 
           break;
         case "distance":
@@ -112,17 +134,21 @@ public class DataCheck {
             return false; 
           break;
         case "east":
-            if (!validateEast(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateEast(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "eggs":
+          if (!validateEggs(blockData, dataContent, sender))
+            return false; 
+          break;
         case "enabled":
           if (!validateEnabled(blockData, dataContent, sender))
             return false; 
           break;
         case "extended":
-            if (!validateExtended(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateExtended(blockData, dataContent, sender))
+            return false; 
+          break;
         case "eye":
           if (!validateEye(blockData, dataContent, sender))
             return false; 
@@ -155,6 +181,10 @@ public class DataCheck {
           if (!validateHanging(blockData, dataContent, sender))
             return false; 
           break;
+        case "hatch":
+          if (!validateHatch(blockData, dataContent, sender))
+            return false; 
+          break;
         case "hinge":
           if (!validateHinge(blockData, dataContent, sender))
             return false; 
@@ -171,18 +201,26 @@ public class DataCheck {
           if (!validateInWall(blockData, dataContent, sender))
             return false; 
           break;
+        case "layers":
+          if (!validateLayers(blockData, dataContent, sender))
+            return false; 
+          break;
         case "leaves":
           if (!validateLeaves(blockData, dataContent, sender))
             return false; 
           break;
         case "level":
-            if (!validateLevel(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateLevel(blockData, dataContent, sender))
+            return false; 
+          break;
         case "lit":
-            if (!validateLit(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateLit(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "locked":
+          if (!validateLocked(blockData, dataContent, sender))
+            return false; 
+          break;
         case "mode":
           if (!validateMode(blockData, dataContent, sender))
             return false; 
@@ -192,13 +230,13 @@ public class DataCheck {
             return false; 
           break;
         case "north":
-            if (!validateNorth(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateNorth(blockData, dataContent, sender))
+            return false; 
+          break;
         case "open":
-            if (!validateOpen(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateOpen(blockData, dataContent, sender))
+            return false; 
+          break;
         case "orientation":
           if (!validateOrientation(blockData, dataContent, sender))
             return false; 
@@ -216,25 +254,37 @@ public class DataCheck {
             return false; 
           break;
         case "powered":
-            if (!validatePowered(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validatePowered(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "rotation":
+          if (!validateRotation(blockData, dataContent, sender))
+            return false; 
+          break;
         case "shape":
-            if (!validateShape(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateShape(blockData, dataContent, sender))
+            return false; 
+          break;
         case "short":
-            if (!validateShort(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateShort(blockData, dataContent, sender))
+            return false; 
+          break;
         case "signal_fire":
           if (!validateSignalFire(blockData, dataContent, sender))
             return false; 
           break;
-        case "south":
-            if (!validateSouth(blockData, dataContent, sender))
+        case "snowy":
+            if (!validateSnowy(blockData, dataContent, sender))
               return false; 
             break;
+        case "south":
+          if (!validateSouth(blockData, dataContent, sender))
+            return false; 
+          break;
+        case "stage":
+          if (!validateStage(blockData, dataContent, sender))
+            return false; 
+          break;
         case "triggered":
           if (!validateTriggered(blockData, dataContent, sender))
             return false; 
@@ -243,14 +293,18 @@ public class DataCheck {
           if (!validateType(blockData, dataContent, sender))
             return false; 
           break;
+        case "unstable":
+          if (!validateUnstable(blockData, dataContent, sender))
+            return false; 
+          break;
         case "up":
-            if (!validateUp(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateUp(blockData, dataContent, sender))
+            return false; 
+          break;
         case "west":
-            if (!validateWest(blockData, dataContent, sender))
-              return false; 
-            break;
+          if (!validateWest(blockData, dataContent, sender))
+            return false; 
+          break;
         default:
           return false;
       } 
@@ -333,6 +387,21 @@ public class DataCheck {
     return true;
   }
   
+  //Validates bottom:
+  public static boolean validateBottom(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Scaffolding)) {
+      user.sendMessage(ChatColor.RED + "You cannot set bottom for this block!");
+      return false;
+    } 
+    try {
+      ((Scaffolding)blockData).setBottom(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid bottom for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
   //Validates charges:
   public static boolean validateCharges(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof RespawnAnchor)) {
@@ -363,18 +432,58 @@ public class DataCheck {
     return true;
   }
   
-  //Validates distance:
-  public static boolean validateDistance(BlockData blockData, String dataContent, CommandSender user) {
-    if (!(blockData instanceof Leaves)) {
-      user.sendMessage(ChatColor.RED + "You cannot set a distance for this block!");
+  //Validates delay:
+  public static boolean validateDelay(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Repeater)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a delay for this block!");
       return false;
     } 
     try {
-      ((Leaves)blockData).setDistance(Integer.parseInt(dataContent));
+      ((Repeater)blockData).setDelay(Integer.parseInt(dataContent));
     } catch (Exception ec) {
-      user.sendMessage(ChatColor.RED + dataContent + " is not a valid distance for this block!");
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid delay for this block!");
       return false;
     } 
+    return true;
+  }
+  
+  //Validates disarmed:
+  public static boolean validateDisarmed(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Tripwire)) {
+      user.sendMessage(ChatColor.RED + "You cannot set disarmed for this block!");
+      return false;
+    } 
+    try {
+      ((Tripwire)blockData).setDisarmed(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid disarmed for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates distance:
+  public static boolean validateDistance(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Leaves&&blockData instanceof Scaffolding)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a distance for this block!");
+      return false;
+    } 
+    if(blockData instanceof Leaves) {
+      try {
+        ((Leaves)blockData).setDistance(Integer.parseInt(dataContent));
+      } catch (Exception ec) {
+        user.sendMessage(ChatColor.RED + dataContent + " is not a valid distance for this block!");
+        return false;
+      } 
+    }
+    else if(blockData instanceof Scaffolding) {
+        try {
+          ((Scaffolding)blockData).setDistance(Integer.parseInt(dataContent));
+        } catch (Exception ec) {
+          user.sendMessage(ChatColor.RED + dataContent + " is not a valid distance for this block!");
+          return false;
+        } 
+      }
     return true;
   }
   
@@ -426,6 +535,21 @@ public class DataCheck {
     }
     return true;
   }
+
+  //Validates eggs:
+  public static boolean validateEggs(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof TurtleEgg)) {
+      user.sendMessage(ChatColor.RED + "You cannot set eggs for this block!");
+      return false;
+    } 
+    try {
+      ((TurtleEgg)blockData).setEggs(Integer.parseInt(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid eggs for this block!");
+      return false;
+    } 
+    return true;
+  }
   
   //Validates enabled:
   public static boolean validateEnabled(BlockData blockData, String dataContent, CommandSender user) {
@@ -443,6 +567,8 @@ public class DataCheck {
   }
   
   //Validates extended:
+  
+  //Validates extended:
   public static boolean validateExtended(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Piston)) {
       user.sendMessage(ChatColor.RED + "You cannot set extended for this block!");
@@ -458,6 +584,8 @@ public class DataCheck {
   }
   
   //Validates eye:
+  
+  //Validates eye:
   public static boolean validateEye(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof EndPortalFrame)) {
       user.sendMessage(ChatColor.RED + "You cannot set an eye for this block!");
@@ -471,6 +599,8 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates facing:
   
   //Validates face:
   public static boolean validateFace(BlockData blockData, String dataContent, CommandSender user) {
@@ -503,6 +633,8 @@ public class DataCheck {
   }
   
   //Validates half:
+  
+  //Validates half:
   public static boolean validateHalf(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bisected)) {
       user.sendMessage(ChatColor.RED + "You cannot set a half for this block!");
@@ -517,6 +649,8 @@ public class DataCheck {
     return true;
   }
   
+  //Validates hatch:
+
   //Validates has_bottle_x:
   public static boolean validateHasBottle(BlockData blockData, String dataContent, CommandSender user, int n) {
     if (!(blockData instanceof BrewingStand)) {
@@ -531,6 +665,23 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates hatch:
+  public static boolean validateHatch(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof TurtleEgg)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a hatch for this block!");
+      return false;
+    } 
+    try {
+      ((TurtleEgg)blockData).setHatch(Integer.parseInt(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid hatch for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates hanging:
   
   //Validates hanging:
   public static boolean validateHanging(BlockData blockData, String dataContent, CommandSender user) {
@@ -548,6 +699,8 @@ public class DataCheck {
   }
   
   //Validates hinge:
+  
+  //Validates hinge:
   public static boolean validateHinge(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Door)) {
       user.sendMessage(ChatColor.RED + "You cannot set a hinge for this block!");
@@ -561,6 +714,8 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates in_wall:
   
   //Validates honey_level:
   public static boolean validateHoneyLevel(BlockData blockData, String dataContent, CommandSender user) {
@@ -622,6 +777,25 @@ public class DataCheck {
     return true;
   }
   
+  //Validates layer:
+  
+  //Validates layers:
+  public static boolean validateLayers(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Snow)) {
+      user.sendMessage(ChatColor.RED + "You cannot set layers for this block!");
+      return false;
+    } 
+    try {
+      ((Snow)blockData).setLayers(Integer.parseInt(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid layers for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates leaves:
+  
   //Validates leaves:
   public static boolean validateLeaves(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Bamboo)) {
@@ -636,6 +810,8 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates level:
   
   //Validates level:
   public static boolean validateLevel(BlockData blockData, String dataContent, CommandSender user) {
@@ -666,6 +842,25 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates locked:
+  
+  //Validates locked:
+  public static boolean validateLocked(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Repeater)) {
+      user.sendMessage(ChatColor.RED + "You cannot set locked for this block!");
+      return false;
+    } 
+    try {
+      ((Repeater)blockData).setLocked(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid locked for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates moisture:
   
   //Validates mode:
   public static boolean validateMode(BlockData blockData, String dataContent, CommandSender user) {
@@ -786,6 +981,8 @@ public class DataCheck {
     return true;
   }
   
+  //Validates perstistent:
+  
   //Validates persistent:
   public static boolean validatePersistent(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Leaves)) {
@@ -800,6 +997,25 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates pickles:
+  
+  //Validates pickles:
+  public static boolean validatePickles(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof SeaPickle)) {
+      user.sendMessage(ChatColor.RED + "You cannot set pickles for this block!");
+      return false;
+    } 
+    try {
+      ((SeaPickle)blockData).setPickles(Integer.parseInt(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid pickles for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates powered:
   
   //Validates power:
   public static boolean validatePower(BlockData blockData, String dataContent, CommandSender user) {
@@ -830,6 +1046,25 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates rotation:
+  
+  //Validates rotation:
+  public static boolean validateRotation(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Rotatable)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a rotation for this block!");
+      return false;
+    } 
+    try {
+      ((Rotatable)blockData).setRotation(BlockFace.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid rotation for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates short:
   
   //Validates shape:
   public static boolean validateShape(BlockData blockData, String dataContent, CommandSender user) {
@@ -871,6 +1106,8 @@ public class DataCheck {
     return true;
   }
   
+  //Validates snowy:
+  
   //Validates signal_fire:
   public static boolean validateSignalFire(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Campfire)) {
@@ -885,6 +1122,40 @@ public class DataCheck {
     } 
     return true;
   }
+  
+  //Validates snowy:
+  public static boolean validateSnowy(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Snowable)) {
+      user.sendMessage(ChatColor.RED + "You cannot set snowy for this block!");
+      return false;
+    } 
+    try {
+      ((Snowable)blockData).setSnowy(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid snowy for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates stage:
+  
+  //Validates stage:
+  public static boolean validateStage(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof Sapling)) {
+      user.sendMessage(ChatColor.RED + "You cannot set a stage for this block!");
+      return false;
+    } 
+    try {
+      ((Sapling)blockData).setStage(Integer.parseInt(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid stage for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates triggered:
   
   //Validates south:
   public static boolean validateSouth(BlockData blockData, String dataContent, CommandSender user) {
@@ -935,6 +1206,8 @@ public class DataCheck {
     return true;
   }
   
+  //Validates unstable:
+  
   //validates type:
   public static boolean validateType(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Chest)&&!(blockData instanceof Slab)&&!(blockData instanceof TechnicalPiston)) {
@@ -968,6 +1241,23 @@ public class DataCheck {
     return true;
   }
 
+  //Validates unstable:
+  public static boolean validateUnstable(BlockData blockData, String dataContent, CommandSender user) {
+    if (!(blockData instanceof TNT)) {
+      user.sendMessage(ChatColor.RED + "You cannot set unstable for this block!");
+      return false;
+    } 
+    try {
+      ((TNT)blockData).setUnstable(Boolean.valueOf(dataContent));
+    } catch (Exception ec) {
+      user.sendMessage(ChatColor.RED + dataContent + " is not a valid unstable for this block!");
+      return false;
+    } 
+    return true;
+  }
+  
+  //Validates up:
+  
   //Validates up:
   public static boolean validateUp(BlockData blockData, String dataContent, CommandSender user) {
     if (!(blockData instanceof Wall)) {
